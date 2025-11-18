@@ -1,0 +1,10 @@
+# .gitignore 
+
+# Ignore the virtual environment folder
+venv/
+
+# Ignores the folder named '__pycache__' anywhere in the project
+__pycache__/
+
+# Ignore any file ending with .pt extension (e.g., PyTorch model files)
+*.pt
