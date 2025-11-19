@@ -8,3 +8,4 @@ __pycache__/
 
 # Ignore any file ending with .pt extension (e.g., PyTorch model files)
 *.pt
+/Elders fall detection using Yolov10+Deepsort+mediapipe
