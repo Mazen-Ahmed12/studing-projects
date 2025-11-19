@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<div>
+     <h1 class="text-3xl font-bold text-red-600">this is a flask application</h1>
+    <h1 class="text-xl font-bold">this is crud application</h1>
+    {% if tasks | length < 1 %}
+    <h1>there is no taks .... create one</h1>
+    {% else %}
+    <table class="border-separate border-spacing-x-6 border-spacing-y-2">
+        <tr>
+            <th>Task</th>   
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.content }}</td>
+            <td>{{ task.created.strftime("%Y-%m-%d") }}</td>
+            <td>
+                <a href="/delete/{{ task.id }}">Delete</a>
+                <a href="/update/{{ task.id }}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <form action="/" method="POST"> 
+        <input type="text" name="content" id="content" class="border border-black">
+        <input type="submit" value="Add Task" id="btn_add" class="bg-yellow-500 p-1 ">
+    </form>
+</div>
+{% endblock %}
