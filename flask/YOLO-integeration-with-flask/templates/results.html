@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block head %}
+<title>Detection result</title>
+{% endblock %}
+{% block body %}
+<div class="bg-gray-50 min-h-screen flex items-center justify-center">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-2xl font-bold mb-4">Detection Results</h1>
+
+    <div class="bg-white shadow rounded p-4">
+      <h2 class="text-xl font-semibold mb-2">Detections</h2>
+      <ul>
+        {% for d in detections %}
+        <li class="border-b py-2">
+          <p class="text-red-600 font-bold">{{ d.fall_message }}</p>
+          <p class="text-gray-700">Track ID: {{ d.track_id }} | Frame: {{ d.frame_id }}</p>
+        </li>
+        {% else %}
+        <li class="py-4 text-center">
+          <p class="text-gray-600">
+            No fall detections recorded in this video.
+          </p>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <a href="/" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded">Back to Upload</a>
+  </div>
+</div>
+{% endblock %}
