@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block head %}
+<title>YOLO Detection</title>
+{% endblock %}
+{% block body %}
+<div class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-2xl font-bold mb-4">YOLO Detection</h1>
+
+    <!-- Upload File -->
+    <form action="/upload" method="POST" enctype="multipart/form-data" class="mb-6">
+      <input type="file" name="video" class="border p-2 rounded">
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Upload File</button>
+    </form>
+
+    <!-- Video URL -->
+    <form action="/upload_url" method="POST" class="mb-6">
+      <input type="text" name="video_url" placeholder="Paste video URL" class="border p-2 rounded w-full">
+      <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Use URL</button>
+    </form>
+
+    <!-- Live Camera -->
+    <form action="/live" method="POST" class="mb-6">
+      <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Start Live Cam</button>
+    </form>
+
+    <!-- Spinner while processing -->
+    {% if processing %}
+      <div class="flex items-center justify-center p-6">
+        <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+        <p class="ml-4 text-blue-600 font-semibold">Processing video... please wait</p>
+      </div>
+
+      <!-- Auto redirect to /result when processing finishes -->
+      <script>
+        setInterval(async () => {
+          const res = await fetch("/");
+          const text = await res.text();
+          if (!text.includes("Processing video")) {
+            window.location.href = "/result";
+          }
+        }, 3000);
+      </script>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
